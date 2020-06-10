@@ -1,4 +1,5 @@
 import express from 'express'
+import proxy from 'express-http-proxy'
 import { render } from './utils'
 import { getStore } from '../store/index.js'
 import routes from '../Routes'
@@ -7,6 +8,12 @@ import { matchRoutes } from 'react-router-config'
 
 const app = express()
 app.use(express.static('public'))
+
+app.use('/api',proxy('http://localhost:4000', {
+	proxyReqPathResolver: function (req) {
+		return '/ssr/api'+ req.url
+	}
+}));
 
 app.get('*',function (req,res) {
 	const store = getStore()
@@ -24,7 +31,7 @@ app.get('*',function (req,res) {
 	})
 })
 
-var server = app.listen(4000, function() {
+var server = app.listen(3000, function() {
 	var host = server.address().address
 	var port = server.address().port
 	console.log('Example app listening at http://%s:%s', host, port)

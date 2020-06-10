@@ -10,9 +10,14 @@ const changeList = (list) => {
 	}
 }
 
-export const getHomeList = () => {
+export const getHomeList = (server) => {
+	let url = ''
+	server ?
+		url = 'http://localhost:4000/ssr/api/news.json?secret=abcd' :
+	  url = '/api/news.json?secret=abcd'
+
 	return (dispatch)=> {
-		return axios.get('http://localhost:4000/newsList.json')
+		return axios.get(url)
 		.then((res)=>{
 			const list = res.data
 			dispatch(changeList(list))
