@@ -1,0 +1,11 @@
+{
+	"presets": ["next/babel"], // 加入next当中的默认babel配置
+	"plugins": [
+		[
+			"import",
+			{
+				"libraryName":"antd"
+			}
+		]
+	]
+}

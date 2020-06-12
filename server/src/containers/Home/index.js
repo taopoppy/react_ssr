@@ -1,12 +1,11 @@
 import React from 'react'
-import Header from '../../components/Header'
 import {  connect } from 'react-redux'
 import { getHomeList } from './store/action'
 
 class Home extends React.Component {
 	componentDidMount() {
 		if(!this.props.list.length) {
-			this.props.getHomeList(false)
+			this.props.getHomeList()
 		}
 	}
 	getHomeList() {
@@ -16,7 +15,6 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header />
 				{
 					this.getHomeList()
 				}
@@ -28,7 +26,7 @@ class Home extends React.Component {
 
 Home.loadData = (store) => {
 	// 这个函数，负责在服务器渲染之前，把这个路由需要的数据提前加载好
-	return store.dispatch(getHomeList(true))
+	return store.dispatch(getHomeList())
 }
 
 

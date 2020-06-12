@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware,combineReducers,compose  } from 'redux'
 import thunk from 'redux-thunk'
 import { reducer as homeReducer } from '../containers/Home/store/index.js'
+import clientAxios from '../client/request'
+import serverAxios from '../server/request'
 
 const reducer = combineReducers({
 	home: homeReducer
@@ -8,7 +10,7 @@ const reducer = combineReducers({
 
 
 export const getStore = ()=> {
-	return createStore(reducer,applyMiddleware(thunk))
+	return createStore(reducer,applyMiddleware(thunk.withExtraArgument(serverAxios)))
 }
 
 export const getClientStore = () => {
@@ -16,7 +18,7 @@ export const getClientStore = () => {
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
 	const enhancer = composeEnhancers(
-		applyMiddleware(thunk),
+		applyMiddleware(thunk.withExtraArgument(clientAxios)),
 	);
 
 

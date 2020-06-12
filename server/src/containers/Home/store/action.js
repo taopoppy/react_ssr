@@ -1,4 +1,3 @@
-import axios from 'axios'
 import {
 	CHANGE_LIST
 } from './constants'
@@ -10,14 +9,9 @@ const changeList = (list) => {
 	}
 }
 
-export const getHomeList = (server) => {
-	let url = ''
-	server ?
-		url = 'http://localhost:4000/ssr/api/news.json?secret=abcd' :
-	  url = '/api/news.json?secret=abcd'
-
-	return (dispatch)=> {
-		return axios.get(url)
+export const getHomeList = () => {
+	return (dispatch, getState, axiosInstance)=> {
+		return axiosInstance.get('/api/news.json?secret=abcd')
 		.then((res)=>{
 			const list = res.data
 			dispatch(changeList(list))
