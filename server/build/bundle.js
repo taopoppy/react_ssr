@@ -94,7 +94,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Header = __webpack_require__(/*! ./components/Header */ \"./src/components/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App(props) {\n\treturn _react2.default.createElement(\n\t\t'div',\n\t\tnull,\n\t\t_react2.default.createElement(_Header2.default, null),\n\t\t(0, _reactRouterConfig.renderRoutes)(props.route.routes),\n\t\t' '\n\t);\n};\n\nexports.default = App;\n\n//# sourceURL=webpack:///./src/App.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _index = __webpack_require__(/*! ./components/Header/index.js */ \"./src/components/Header/index.js\");\n\nvar _index2 = _interopRequireDefault(_index);\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nvar _index3 = __webpack_require__(/*! ./components/Header/store/index.js */ \"./src/components/Header/store/index.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App(props) {\n\treturn _react2.default.createElement(\n\t\t'div',\n\t\tnull,\n\t\t_react2.default.createElement(_index2.default, null),\n\t\t(0, _reactRouterConfig.renderRoutes)(props.route.routes),\n\t\t' '\n\t);\n};\n\nApp.loadData = function (store) {\n\treturn store.dispatch(_index3.actions.getHeaderInfo());\n};\n\nexports.default = App;\n\n//# sourceURL=webpack:///./src/App.js?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _index = __webpack_require__(/*! ./containers/Home/index.js */ \"./src/containers/Home/index.js\");\n\nvar _index2 = _interopRequireDefault(_index);\n\nvar _index3 = __webpack_require__(/*! ./containers/Login/index.js */ \"./src/containers/Login/index.js\");\n\nvar _index4 = _interopRequireDefault(_index3);\n\nvar _App = __webpack_require__(/*! ./App */ \"./src/App.js\");\n\nvar _App2 = _interopRequireDefault(_App);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = [{\n\tpath: '/',\n\tcomponent: _App2.default,\n\troutes: [{\n\t\tpath: '/',\n\t\tcomponent: _index2.default,\n\t\texact: true,\n\t\tloadData: _index2.default.loadData,\n\t\tkey: 'home'\n\t}, {\n\t\tpath: '/login',\n\t\tcomponent: _index4.default,\n\t\texact: true,\n\t\tkey: 'login'\n\t}]\n}];\n\n//# sourceURL=webpack:///./src/Routes.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _index = __webpack_require__(/*! ./containers/Home/index.js */ \"./src/containers/Home/index.js\");\n\nvar _index2 = _interopRequireDefault(_index);\n\nvar _index3 = __webpack_require__(/*! ./containers/Translation/index.js */ \"./src/containers/Translation/index.js\");\n\nvar _index4 = _interopRequireDefault(_index3);\n\nvar _App = __webpack_require__(/*! ./App */ \"./src/App.js\");\n\nvar _App2 = _interopRequireDefault(_App);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = [{\n\tpath: '/',\n\tcomponent: _App2.default,\n\tloadData: _App2.default.loadData,\n\troutes: [{\n\t\tpath: '/',\n\t\tcomponent: _index2.default,\n\t\texact: true,\n\t\tloadData: _index2.default.loadData,\n\t\tkey: 'home'\n\t}, {\n\t\tpath: '/translation',\n\t\tcomponent: _index4.default,\n\t\texact: true,\n\t\tloadData: _index4.default.loadData,\n\t\tkey: 'translation'\n\t}]\n}];\n\n//# sourceURL=webpack:///./src/Routes.js?");
 
 /***/ }),
 
@@ -122,15 +122,63 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 
 /***/ }),
 
-/***/ "./src/components/Header.js":
-/*!**********************************!*\
-  !*** ./src/components/Header.js ***!
-  \**********************************/
+/***/ "./src/components/Header/index.js":
+/*!****************************************!*\
+  !*** ./src/components/Header/index.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Header = function Header() {\n\treturn _react2.default.createElement(\n\t\t'div',\n\t\tnull,\n\t\t_react2.default.createElement(\n\t\t\t_reactRouterDom.Link,\n\t\t\t{ to: '/' },\n\t\t\t'Home'\n\t\t),\n\t\t_react2.default.createElement(\n\t\t\t_reactRouterDom.Link,\n\t\t\t{ to: '/login' },\n\t\t\t'Login'\n\t\t)\n\t);\n};\n\nexports.default = Header;\n\n//# sourceURL=webpack:///./src/components/Header.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _index = __webpack_require__(/*! ./store/index.js */ \"./src/components/Header/store/index.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar Header = function (_React$Component) {\n\t_inherits(Header, _React$Component);\n\n\tfunction Header() {\n\t\t_classCallCheck(this, Header);\n\n\t\treturn _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));\n\t}\n\n\t_createClass(Header, [{\n\t\tkey: 'render',\n\t\tvalue: function render() {\n\t\t\tvar _props = this.props,\n\t\t\t    login = _props.login,\n\t\t\t    handleLogin = _props.handleLogin,\n\t\t\t    handleLogout = _props.handleLogout;\n\n\t\t\treturn _react2.default.createElement(\n\t\t\t\t'div',\n\t\t\t\tnull,\n\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t_reactRouterDom.Link,\n\t\t\t\t\t{ to: '/' },\n\t\t\t\t\t'\\u9996\\u9875'\n\t\t\t\t),\n\t\t\t\t_react2.default.createElement('br', null),\n\t\t\t\tlogin ? _react2.default.createElement(\n\t\t\t\t\t_react.Fragment,\n\t\t\t\t\tnull,\n\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t_reactRouterDom.Link,\n\t\t\t\t\t\t{ to: '/translation' },\n\t\t\t\t\t\t'\\u7FFB\\u8BD1\\u5217\\u8868'\n\t\t\t\t\t),\n\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t'div',\n\t\t\t\t\t\t{ onClick: handleLogout },\n\t\t\t\t\t\t'\\u9000\\u51FA'\n\t\t\t\t\t)\n\t\t\t\t) : _react2.default.createElement(\n\t\t\t\t\t'div',\n\t\t\t\t\t{ onClick: handleLogin },\n\t\t\t\t\t'\\u767B\\u5F55'\n\t\t\t\t)\n\t\t\t);\n\t\t}\n\t}]);\n\n\treturn Header;\n}(_react2.default.Component);\n\nvar mapStateToProps = function mapStateToProps(state) {\n\treturn {\n\t\tlogin: state.header.login\n\t};\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n\treturn {\n\t\thandleLogin: function handleLogin() {\n\t\t\tdispatch(_index.actions.login());\n\t\t},\n\t\thandleLogout: function handleLogout() {\n\t\t\tdispatch(_index.actions.logout());\n\t\t}\n\t};\n};\n\nexports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Header);\n\n//# sourceURL=webpack:///./src/components/Header/index.js?");
+
+/***/ }),
+
+/***/ "./src/components/Header/store/actions.js":
+/*!************************************************!*\
+  !*** ./src/components/Header/store/actions.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.getHeaderInfo = exports.logout = exports.login = exports.changeLogin = undefined;\n\nvar _constants = __webpack_require__(/*! ./constants */ \"./src/components/Header/store/constants.js\");\n\nvar changeLogin = exports.changeLogin = function changeLogin(value) {\n\treturn {\n\t\ttype: _constants.CHANGE_LOGIN,\n\t\tvalue: value\n\t};\n};\n\nvar login = exports.login = function login() {\n\treturn function (dispatch, getState, axiosInstance) {\n\t\treturn axiosInstance.get('/api/login.json?secret=abcd').then(function (res) {\n\t\t\tdispatch(changeLogin(true));\n\t\t}).catch(function (err) {\n\t\t\tconsole.log(err);\n\t\t});\n\t};\n};\n\nvar logout = exports.logout = function logout() {\n\treturn function (dispatch, getState, axiosInstance) {\n\t\treturn axiosInstance.get('/api/logout.json?secret=abcd').then(function (res) {\n\t\t\tdispatch(changeLogin(false));\n\t\t}).catch(function (err) {\n\t\t\tconsole.log(err);\n\t\t});\n\t};\n};\n\nvar getHeaderInfo = exports.getHeaderInfo = function getHeaderInfo() {\n\treturn function (dispatch, getState, axiosInstance) {\n\t\treturn axiosInstance.get('/api/isLogin.json?secret=abcd').then(function (res) {\n\t\t\tvar isLogin = res.data.data.login;\n\t\t\tdispatch(changeLogin(isLogin));\n\t\t}).catch(function (err) {\n\t\t\tconsole.log(err);\n\t\t});\n\t};\n};\n\n//# sourceURL=webpack:///./src/components/Header/store/actions.js?");
+
+/***/ }),
+
+/***/ "./src/components/Header/store/constants.js":
+/*!**************************************************!*\
+  !*** ./src/components/Header/store/constants.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar CHANGE_LOGIN = exports.CHANGE_LOGIN = 'HOME/CHANGE_LOGIN';\n\n//# sourceURL=webpack:///./src/components/Header/store/constants.js?");
+
+/***/ }),
+
+/***/ "./src/components/Header/store/index.js":
+/*!**********************************************!*\
+  !*** ./src/components/Header/store/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.actions = exports.reducer = undefined;\n\nvar _reducer = __webpack_require__(/*! ./reducer */ \"./src/components/Header/store/reducer.js\");\n\nvar _reducer2 = _interopRequireDefault(_reducer);\n\nvar _actions = __webpack_require__(/*! ./actions */ \"./src/components/Header/store/actions.js\");\n\nvar actions = _interopRequireWildcard(_actions);\n\nfunction _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.reducer = _reducer2.default;\nexports.actions = actions;\n\n//# sourceURL=webpack:///./src/components/Header/store/index.js?");
+
+/***/ }),
+
+/***/ "./src/components/Header/store/reducer.js":
+/*!************************************************!*\
+  !*** ./src/components/Header/store/reducer.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _constants = __webpack_require__(/*! ./constants */ \"./src/components/Header/store/constants.js\");\n\nvar defaultState = {\n\tlogin: true\n};\n\nexports.default = function () {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;\n\tvar action = arguments[1];\n\n\tswitch (action.type) {\n\t\tcase _constants.CHANGE_LOGIN:\n\t\t\tvar newState = _extends({}, state, { login: action.value });\n\t\t\treturn newState;\n\t\tdefault:\n\t\t\treturn state;\n\t}\n};\n\n//# sourceURL=webpack:///./src/components/Header/store/reducer.js?");
 
 /***/ }),
 
@@ -194,15 +242,63 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 
 /***/ }),
 
-/***/ "./src/containers/Login/index.js":
-/*!***************************************!*\
-  !*** ./src/containers/Login/index.js ***!
-  \***************************************/
+/***/ "./src/containers/Translation/index.js":
+/*!*********************************************!*\
+  !*** ./src/containers/Translation/index.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Login = function Login() {\n\treturn _react2.default.createElement(\n\t\t'div',\n\t\tnull,\n\t\t_react2.default.createElement(\n\t\t\t'div',\n\t\t\tnull,\n\t\t\t'this is Login page'\n\t\t)\n\t);\n};\n\nexports.default = Login;\n\n//# sourceURL=webpack:///./src/containers/Login/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _action = __webpack_require__(/*! ./store/action */ \"./src/containers/Translation/store/action.js\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar Translation = function (_React$Component) {\n\t_inherits(Translation, _React$Component);\n\n\tfunction Translation() {\n\t\t_classCallCheck(this, Translation);\n\n\t\treturn _possibleConstructorReturn(this, (Translation.__proto__ || Object.getPrototypeOf(Translation)).apply(this, arguments));\n\t}\n\n\t_createClass(Translation, [{\n\t\tkey: 'componentDidMount',\n\t\tvalue: function componentDidMount() {\n\t\t\tif (!this.props.list.length) {\n\t\t\t\tthis.props.getTranslationList();\n\t\t\t}\n\t\t}\n\t}, {\n\t\tkey: 'getList',\n\t\tvalue: function getList() {\n\t\t\tvar list = this.props.list;\n\n\t\t\treturn list.map(function (item) {\n\t\t\t\treturn _react2.default.createElement(\n\t\t\t\t\t'div',\n\t\t\t\t\t{ key: item.id },\n\t\t\t\t\titem.title\n\t\t\t\t);\n\t\t\t});\n\t\t}\n\t}, {\n\t\tkey: 'render',\n\t\tvalue: function render() {\n\t\t\tif (this.props.login) {\n\t\t\t\treturn _react2.default.createElement(\n\t\t\t\t\t'div',\n\t\t\t\t\tnull,\n\t\t\t\t\tthis.getList(),\n\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t'button',\n\t\t\t\t\t\t{ onClick: function onClick() {\n\t\t\t\t\t\t\t\talert('click');\n\t\t\t\t\t\t\t} },\n\t\t\t\t\t\t'click'\n\t\t\t\t\t)\n\t\t\t\t);\n\t\t\t} else {\n\t\t\t\treturn _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' }); // 跳转到首页\n\t\t\t}\n\t\t}\n\t}]);\n\n\treturn Translation;\n}(_react2.default.Component);\n\nTranslation.loadData = function (store) {\n\treturn store.dispatch((0, _action.getTranslationList)());\n};\n\nvar mapStateToProps = function mapStateToProps(state) {\n\treturn {\n\t\tlist: state.translation.translationList,\n\t\tlogin: state.header.login // 拿到登录状态\n\t};\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n\treturn {\n\t\tgetTranslationList: function getTranslationList() {\n\t\t\tdispatch((0, _action.getTranslationList)());\n\t\t}\n\t};\n};\n\nexports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Translation);\n\n//# sourceURL=webpack:///./src/containers/Translation/index.js?");
+
+/***/ }),
+
+/***/ "./src/containers/Translation/store/action.js":
+/*!****************************************************!*\
+  !*** ./src/containers/Translation/store/action.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.getTranslationList = undefined;\n\nvar _constants = __webpack_require__(/*! ./constants */ \"./src/containers/Translation/store/constants.js\");\n\nvar changeList = function changeList(list) {\n\treturn {\n\t\ttype: _constants.CHANGE_LIST,\n\t\tlist: list\n\t};\n};\n\nvar getTranslationList = exports.getTranslationList = function getTranslationList() {\n\treturn function (dispatch, getState, axiosInstance) {\n\t\treturn axiosInstance.get('/api/translations.json?secret=abcd').then(function (res) {\n\t\t\tif (res.data.success) {\n\t\t\t\tvar list = res.data.data;\n\t\t\t\tdispatch(changeList(list));\n\t\t\t} else {\n\t\t\t\tvar _list = [];\n\t\t\t\tdispatch(changeList(_list));\n\t\t\t}\n\t\t}).catch(function (err) {\n\t\t\tconsole.log(err);\n\t\t});\n\t};\n};\n\n//# sourceURL=webpack:///./src/containers/Translation/store/action.js?");
+
+/***/ }),
+
+/***/ "./src/containers/Translation/store/constants.js":
+/*!*******************************************************!*\
+  !*** ./src/containers/Translation/store/constants.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar CHANGE_LIST = exports.CHANGE_LIST = 'TRANSLATION/CHANGE_LIST';\n\n//# sourceURL=webpack:///./src/containers/Translation/store/constants.js?");
+
+/***/ }),
+
+/***/ "./src/containers/Translation/store/index.js":
+/*!***************************************************!*\
+  !*** ./src/containers/Translation/store/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.reducer = undefined;\n\nvar _reducer = __webpack_require__(/*! ./reducer */ \"./src/containers/Translation/store/reducer.js\");\n\nvar _reducer2 = _interopRequireDefault(_reducer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.reducer = _reducer2.default;\n\n//# sourceURL=webpack:///./src/containers/Translation/store/index.js?");
+
+/***/ }),
+
+/***/ "./src/containers/Translation/store/reducer.js":
+/*!*****************************************************!*\
+  !*** ./src/containers/Translation/store/reducer.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _constants = __webpack_require__(/*! ./constants */ \"./src/containers/Translation/store/constants.js\");\n\nvar defaultState = {\n\ttranslationList: []\n};\n\nexports.default = function () {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;\n\tvar action = arguments[1];\n\n\tswitch (action.type) {\n\t\tcase _constants.CHANGE_LIST:\n\t\t\tvar newState = _extends({}, state, { translationList: action.list });\n\t\t\treturn newState;\n\t\tdefault:\n\t\t\treturn state;\n\t}\n};\n\n//# sourceURL=webpack:///./src/containers/Translation/store/reducer.js?");
 
 /***/ }),
 
@@ -214,7 +310,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _express = __webpack_require__(/*! express */ \"express\");\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _expressHttpProxy = __webpack_require__(/*! express-http-proxy */ \"express-http-proxy\");\n\nvar _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);\n\nvar _utils = __webpack_require__(/*! ./utils */ \"./src/server/utils.js\");\n\nvar _index = __webpack_require__(/*! ../store/index.js */ \"./src/store/index.js\");\n\nvar _Routes = __webpack_require__(/*! ../Routes */ \"./src/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar app = (0, _express2.default)();\napp.use(_express2.default.static('public'));\n\napp.use('/api', (0, _expressHttpProxy2.default)('http://localhost:4000', {\n\tproxyReqPathResolver: function proxyReqPathResolver(req) {\n\t\treturn '/ssr/api' + req.url;\n\t}\n}));\n\napp.get('*', function (req, res) {\n\tvar store = (0, _index.getStore)();\n\tvar matchedRoutes = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path);\n\tvar promises = [];\n\n\tmatchedRoutes.forEach(function (item) {\n\t\tif (item.route.loadData) {\n\t\t\tpromises.push(item.route.loadData(store));\n\t\t}\n\t});\n\n\tPromise.all(promises).then(function () {\n\t\tres.send((0, _utils.render)(store, _Routes2.default, req));\n\t});\n});\n\nvar server = app.listen(3000, function () {\n\tvar host = server.address().address;\n\tvar port = server.address().port;\n\tconsole.log('Example app listening at http://%s:%s', host, port);\n});\n\n//# sourceURL=webpack:///./src/server/index.js?");
+eval("\n\nvar _express = __webpack_require__(/*! express */ \"express\");\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _expressHttpProxy = __webpack_require__(/*! express-http-proxy */ \"express-http-proxy\");\n\nvar _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);\n\nvar _utils = __webpack_require__(/*! ./utils */ \"./src/server/utils.js\");\n\nvar _index = __webpack_require__(/*! ../store/index.js */ \"./src/store/index.js\");\n\nvar _Routes = __webpack_require__(/*! ../Routes */ \"./src/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar app = (0, _express2.default)();\napp.use(_express2.default.static('public'));\n\napp.use('/api', (0, _expressHttpProxy2.default)('http://localhost:4000', {\n\tproxyReqPathResolver: function proxyReqPathResolver(req) {\n\t\treturn '/ssr/api' + req.url;\n\t}\n}));\n\napp.get('*', function (req, res) {\n\tvar store = (0, _index.getStore)(req);\n\tvar matchedRoutes = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path);\n\tvar promises = [];\n\n\tmatchedRoutes.forEach(function (item) {\n\t\tif (item.route.loadData) {\n\t\t\tpromises.push(item.route.loadData(store));\n\t\t}\n\t});\n\n\tPromise.all(promises).then(function () {\n\t\tres.send((0, _utils.render)(store, _Routes2.default, req));\n\t});\n});\n\nvar server = app.listen(3000, function () {\n\tvar host = server.address().address;\n\tvar port = server.address().port;\n\tconsole.log('Example app listening at http://%s:%s', host, port);\n});\n\n//# sourceURL=webpack:///./src/server/index.js?");
 
 /***/ }),
 
@@ -226,7 +322,7 @@ eval("\n\nvar _express = __webpack_require__(/*! express */ \"express\");\n\nvar
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _axios = __webpack_require__(/*! axios */ \"axios\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar instance = _axios2.default.create({\n\tbaseURL: 'http://localhost:4000/ssr'\n});\n\nexports.default = instance;\n\n//# sourceURL=webpack:///./src/server/request.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _axios = __webpack_require__(/*! axios */ \"axios\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar createInstance = function createInstance(req) {\n\treturn _axios2.default.create({\n\t\tbaseURL: 'http://localhost:4000/ssr',\n\t\theaders: {\n\t\t\tcoodkie: req.get('cookie') || ''\n\t\t}\n\t});\n};\n\nexports.default = createInstance;\n\n//# sourceURL=webpack:///./src/server/request.js?");
 
 /***/ }),
 
@@ -250,7 +346,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.getClientStore = exports.getStore = undefined;\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"redux-thunk\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _index = __webpack_require__(/*! ../containers/Home/store/index.js */ \"./src/containers/Home/store/index.js\");\n\nvar _request = __webpack_require__(/*! ../client/request */ \"./src/client/request.js\");\n\nvar _request2 = _interopRequireDefault(_request);\n\nvar _request3 = __webpack_require__(/*! ../server/request */ \"./src/server/request.js\");\n\nvar _request4 = _interopRequireDefault(_request3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar reducer = (0, _redux.combineReducers)({\n\thome: _index.reducer\n});\n\nvar getStore = exports.getStore = function getStore() {\n\treturn (0, _redux.createStore)(reducer, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(_request4.default)));\n};\n\nvar getClientStore = exports.getClientStore = function getClientStore() {\n\tvar composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : _redux.compose;\n\n\tvar enhancer = composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(_request2.default)));\n\n\tvar defaultState = window.context.state;\n\treturn (0, _redux.createStore)(reducer, defaultState, enhancer);\n};\n\n//# sourceURL=webpack:///./src/store/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.getClientStore = exports.getStore = undefined;\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"redux-thunk\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _index = __webpack_require__(/*! ../containers/Home/store/index.js */ \"./src/containers/Home/store/index.js\");\n\nvar _index2 = __webpack_require__(/*! ../components/Header/store/index.js */ \"./src/components/Header/store/index.js\");\n\nvar _index3 = __webpack_require__(/*! ../containers/Translation/store/index.js */ \"./src/containers/Translation/store/index.js\");\n\nvar _request = __webpack_require__(/*! ../client/request */ \"./src/client/request.js\");\n\nvar _request2 = _interopRequireDefault(_request);\n\nvar _request3 = __webpack_require__(/*! ../server/request */ \"./src/server/request.js\");\n\nvar _request4 = _interopRequireDefault(_request3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar reducer = (0, _redux.combineReducers)({\n\thome: _index.reducer,\n\theader: _index2.reducer,\n\ttranslation: _index3.reducer\n});\n\nvar getStore = exports.getStore = function getStore(req) {\n\treturn (0, _redux.createStore)(reducer, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument((0, _request4.default)(req))));\n};\n\nvar getClientStore = exports.getClientStore = function getClientStore() {\n\tvar composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : _redux.compose;\n\n\tvar enhancer = composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(_request2.default)));\n\n\tvar defaultState = window.context.state;\n\treturn (0, _redux.createStore)(reducer, defaultState, enhancer);\n};\n\n//# sourceURL=webpack:///./src/store/index.js?");
 
 /***/ }),
 

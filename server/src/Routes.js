@@ -1,10 +1,11 @@
 import Home from './containers/Home/index.js'
-import Login from './containers/Login/index.js'
+import Translation from './containers/Translation/index.js'
 import App from './App'
 
 export default [{
 	path: '/',
 	component: App,
+	loadData: App.loadData,
 	routes: [
 		{
 			path: '/',
@@ -14,10 +15,11 @@ export default [{
 			key: 'home'
 		},
 		{
-			path: '/login',
-			component: Login,
-			exact:true,
-			key: 'login'
+			path: '/translation',
+			component: Translation,
+			exact: true,
+			loadData: Translation.loadData,
+			key: 'translation'
 		},
 	]
 }]
