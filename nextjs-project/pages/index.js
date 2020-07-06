@@ -23,6 +23,7 @@ export default () => {
 	return (
 		<>
 			<span>Index</span>
+			<a>Class A</a>
 		</>
 	)
 }

@@ -4,4 +4,6 @@ if (typeof require !== 'undefined') {
 	require.extensions['.css'] = file => {}
 }
 
-module.exports = withCss({})
+module.exports = withCss({
+	// 在这里写所有的配置项
+})
