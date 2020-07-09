@@ -8,6 +8,9 @@ export default ({children}) => (
 				<Button>A</Button>
 			</Link>
 			<Link href="/test/b">
+				<Button>test/B</Button>
+			</Link>
+			<Link href="/b">
 				<Button>B</Button>
 			</Link>
 		</header>

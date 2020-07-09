@@ -11,7 +11,7 @@ const changeList = (list) => {
 
 export const getHomeList = () => {
 	return (dispatch, getState, axiosInstance)=> {
-		return axiosInstance.get('/api/news.json?secret=abcd')
+		return axiosInstance.get('/api/news.json')
 		.then((res)=>{
 			const list = res.data
 			dispatch(changeList(list))

@@ -9,6 +9,7 @@ class Header extends React.Component {
 		return (
 			<div>
 				<Link to='/'>首页</Link><br/>
+				<Link to='/translation/123'>前端跳转到一个不存在的页面</Link><br/>
 				{
 					login ?
 						<Fragment>

@@ -7,7 +7,7 @@ export const changeLogin = (value) => ({
 
 export const login = () => {
 	return (dispatch, getState, axiosInstance)=> {
-		return axiosInstance.get('/api/login.json?secret=abcd')
+		return axiosInstance.get('/api/login.json')
 		.then((res)=>{
 			dispatch(changeLogin(true))
 		})
@@ -19,7 +19,7 @@ export const login = () => {
 
 export const logout = () => {
 	return (dispatch, getState, axiosInstance)=> {
-		return axiosInstance.get('/api/logout.json?secret=abcd')
+		return axiosInstance.get('/api/logout.json')
 		.then((res)=>{
 			dispatch(changeLogin(false))
 		})
@@ -31,7 +31,7 @@ export const logout = () => {
 
 export const getHeaderInfo = () => {
 	return (dispatch, getState, axiosInstance)=> {
-		return axiosInstance.get('/api/isLogin.json?secret=abcd')
+		return axiosInstance.get('/api/isLogin.json')
 		.then((res)=>{
 			const isLogin = res.data.data.login
 			dispatch(changeLogin(isLogin))
