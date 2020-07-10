@@ -13,7 +13,23 @@ const serverConfig = {
 	},
 	externals:[
 		nodeExternals(), // node当中引入的包（比如express）不会被打包进入bundle.js
-	]
+	],
+	module: {
+		rules: [{
+			test: /\.css?$/,
+			use: [
+				'isomorphic-style-loader',
+				{
+					loader:'css-loader',
+					options: {
+						importLoaders:1,
+						modules: true,
+						localIdentName: '[name]_[local]_[hash:base64:5]'
+					}
+				}
+			]
+		}]
+	}
 }
 
 module.exports = merge(config, serverConfig)

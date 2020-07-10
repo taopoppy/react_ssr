@@ -2,6 +2,8 @@ import React from 'react'
 import {  connect } from 'react-redux'
 import { getTranslationList } from './store/action'
 import { Redirect } from 'react-router-dom'
+import style from './style.css'
+import withStyle from '../../withStyle'
 
 class Translation extends React.Component {
 	componentDidMount() {
@@ -11,25 +13,21 @@ class Translation extends React.Component {
 	}
 	getList() {
 		const { list } = this.props
-		return list.map(item => <div key={item.id}>{item.title}</div>)
+		return list.map(item => <div key={item.id} className={style.item}>{item.title}</div>)
 	}
 	render() {
 		if(this.props.login) {
 			return (
-				<div>
+				<div className={style.container}>
 					{
 						this.getList()
 					}
-					<button onClick={()=> {alert('click')}}>click</button>
 				</div>
 			)
 		}else {
 			return <Redirect to='/'/> // 跳转到首页
 		}
 	}
-}
-Translation.loadData = (store) => {
-	return store.dispatch(getTranslationList())
 }
 
 const mapStateToProps = (state) => ({
@@ -43,4 +41,10 @@ const mapDispatchToProps = (dispatch) => ({
 	}
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Translation)
+const ExportTranslation = connect(mapStateToProps,mapDispatchToProps)(withStyle(Translation,style))
+
+ExportTranslation.loadData = (store) => {
+	return store.dispatch(getTranslationList())
+}
+
+export default ExportTranslation

@@ -2,21 +2,23 @@ import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { actions } from './store/index.js'
+import style from './style.css'
+import withStyles from '../../withStyle'
 
 class Header extends React.Component {
 	render() {
 		const { login, handleLogin, handleLogout } = this.props
 		return (
-			<div>
-				<Link to='/'>首页</Link><br/>
-				<Link to='/translation/123'>前端跳转到一个不存在的页面</Link><br/>
+			<div className={style.container}>
+				<Link to='/' className={style.item}>首页</Link>
+				{/* <Link to='/translation/123' className={style.item}>前端跳转到一个不存在的页面</Link> */}
 				{
 					login ?
 						<Fragment>
-							<Link to='/translation'>翻译列表</Link>
-							<div onClick={handleLogout}>退出</div>
+							<Link to='/translation' className={style.item}>翻译列表</Link>
+							<div className={style.item} onClick={handleLogout}>退出</div>
 						</Fragment>:
-						<div onClick={handleLogin}>登录</div>
+						<div onClick={handleLogin} className={style.item}>登录</div>
 				}
 			</div>
 		)
@@ -36,4 +38,4 @@ const mapDispatchToProps = (dispatch) => ({
 	}
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header)
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(Header, style))

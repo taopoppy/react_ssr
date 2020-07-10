@@ -30,7 +30,9 @@ app.get('*',function (req,res) {
 	});
 
 	Promise.all(promises).then(()=> {
-		const context = {}
+		const context = {
+			css: []
+		}
 		const html = render(store,routes,req,context)
 
 		if(context.action === 'REPLACE') {
@@ -44,7 +46,7 @@ app.get('*',function (req,res) {
 	})
 })
 
-var server = app.listen(3000, function() {
+var server = app.listen(3001, function() {
 	var host = server.address().address
 	var port = server.address().port
 	console.log('Example app listening at http://%s:%s', host, port)

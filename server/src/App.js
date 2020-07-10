@@ -6,7 +6,7 @@ import { actions } from './components/Header/store/index.js'
 const App = (props) => {
 	return (
 		<div>
-			<Header />{/*渲染一级路由*/}
+			<Header staticContext={props.staticContext}/>{/*渲染一级路由*/}
 			{renderRoutes(props.route.routes)} {/*渲染二级路由*/}
 		</div>
 	)

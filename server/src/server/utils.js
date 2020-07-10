@@ -5,31 +5,34 @@ import { Provider } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
 
 export const render = (store,routes,req,context) => {
-		// 等到异步加载完毕，store中有数据再执行后面
-		const content = renderToString((
-			<Provider store={store}>
-				<StaticRouter location={req.path} context={context}>
-					<div>
-						{renderRoutes(routes)}
-					</div>
-				</StaticRouter>
-			</Provider>
-		))
+	// 等到异步加载完毕，store中有数据再执行后面
+	const content = renderToString((
+		<Provider store={store}>
+			<StaticRouter location={req.path} context={context}>
+				<div>
+					{renderRoutes(routes)}
+				</div>
+			</StaticRouter>
+		</Provider>
+	))
 
-		return `
-			<html>
-				<head>
-					<title>ssr</title>
-				</head>
-				<body>
-					<div id="root">${content}</div>
-					<script>
-							window.context = {
-								state: ${JSON.stringify(store.getState())}
-							}
-					</script>
-					<script src='/index.js'></script>
-				</body>
-			</html>
-		`
+	const cssStr = context.css.length ? context.css.join('\n') : ''
+
+	return `
+		<html>
+			<head>
+				<title>ssr</title>
+				<style>${cssStr}</style>
+			</head>
+			<body>
+				<div id="root">${content}</div>
+				<script>
+						window.context = {
+							state: ${JSON.stringify(store.getState())}
+						}
+				</script>
+				<script src='/index.js'></script>
+			</body>
+		</html>
+	`
 }
