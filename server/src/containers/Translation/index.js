@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {  connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
 import { getTranslationList } from './store/action'
 import { Redirect } from 'react-router-dom'
 import style from './style.css'
@@ -18,11 +19,17 @@ class Translation extends React.Component {
 	render() {
 		if(this.props.login) {
 			return (
-				<div className={style.container}>
-					{
-						this.getList()
-					}
-				</div>
+				<Fragment>
+					<Helmet>
+						<title>这是taopoppy的SSR的Translation页面-丰富多彩的翻译</title>
+						<meta name="description" content="这是taopoppy的SSR的home页面-丰富多彩的资讯" ></meta>
+					</Helmet>
+					<div className={style.container}>
+						{
+							this.getList()
+						}
+					</div>
+				</Fragment>
 			)
 		}else {
 			return <Redirect to='/'/> // 跳转到首页

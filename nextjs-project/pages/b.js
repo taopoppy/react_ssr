@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react'
+import React,{ useState, useEffect, useLayoutEffect, useReducer } from 'react'
 
 class MyCount extends React.Component {
 	state = {
@@ -26,23 +26,48 @@ class MyCount extends React.Component {
 	}
 }
 
+
+function countReducer(state, action) {
+	switch (action.type) {
+		case 'add':
+			return state + 1
+		case 'minus':
+			return state - 1
+		default:
+			return state
+	}
+}
+
+
 function MyCountFunc() {
-	const [count, setCount] = useState(0)
+	// const [count, setCount] = useState(0)
+	const [count, dispatchCounter] = useReducer(countReducer, 0)
 	const [name, setName] = useState('taopoppy')
 
-	useEffect(()=> {
-		const interval = setInterval(()=> {
-			setCount(c=> c + 1)
-			setName(c => c + '1')
-		}, 1000)
+	// useEffect(()=> {
+	// 	const interval = setInterval(()=> {
+	// 		// setCount(c=> c + 1)
+	// 		dispatchCounter({type: 'add'})
+	// 	}, 1000)
 
-		return () => clearInterval(interval)
-	}, [])
+	// 	return () => clearInterval(interval)
+	// }, [])
+
+
+	// useLayoutEffect(()=>{
+	// 	console.log('layout effect invoked')
+	// 	return ()=> console.log('layout effect deteched')
+	// },[count])
+
+	useEffect(()=>{
+		console.log('effect invoked')
+		return ()=> console.log('effect deteched')
+	},[count])
 
 	return(
 		<>
-			<span>{count}</span>
-			<span>{name}</span>
+			<button onClick={()=> dispatchCounter({type: 'add'})}>{count}</button>
+			<input value={name} onChange={(e)=>setName(e.target.value)}></input>
 		</>
 	)
 }
