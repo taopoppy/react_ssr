@@ -1,4 +1,13 @@
-import React,{ useState, useEffect, useLayoutEffect, useReducer } from 'react'
+import React,{ 
+	useState,
+	useEffect,
+	useLayoutEffect,
+	useReducer,
+	useContext,
+	useRef
+} from 'react'
+import MyContext from '../lib/my-context'
+
 
 class MyCount extends React.Component {
 	state = {
@@ -40,9 +49,13 @@ function countReducer(state, action) {
 
 
 function MyCountFunc() {
+	const context = useContext(MyContext)
+
 	// const [count, setCount] = useState(0)
 	const [count, dispatchCounter] = useReducer(countReducer, 0)
 	const [name, setName] = useState('taopoppy')
+
+	const inputRef = useRef()
 
 	// useEffect(()=> {
 	// 	const interval = setInterval(()=> {
@@ -61,13 +74,15 @@ function MyCountFunc() {
 
 	useEffect(()=>{
 		console.log('effect invoked')
+		console.log(inputRef)
 		return ()=> console.log('effect deteched')
 	},[count])
 
 	return(
 		<>
 			<button onClick={()=> dispatchCounter({type: 'add'})}>{count}</button>
-			<input value={name} onChange={(e)=>setName(e.target.value)}></input>
+			<input ref={inputRef} value={name} onChange={(e)=>setName(e.target.value)}></input>
+			<p>{context}</p>
 		</>
 	)
 }
