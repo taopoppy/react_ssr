@@ -1,1 +1,1 @@
-export default ({children}) => <sapn>Lazy Component</sapn>
+export default ({children}) => <span>Lazy Component</span>

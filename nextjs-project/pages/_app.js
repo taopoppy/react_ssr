@@ -3,6 +3,9 @@ import Head from 'next/head'
 import 'antd/dist/antd.css'
 import Layout from '../components/layout'
 import MyContext from '../lib/my-context'
+import { Provider } from 'react-redux'
+import store from '../store/store.js'
+import testHoc from '../lib/test-hoc.js'
 
 
 class MyApp extends App {
@@ -29,13 +32,15 @@ class MyApp extends App {
 					<title>Taopoppy</title>
 				</Head>
 				<Layout>
-					<MyContext.Provider value="test context">
-						<Component {...pageProps}/> {/* 4. 将数据传入给要渲染的组件或者页面*/}
-					</MyContext.Provider>
+					<Provider store={store}>
+						<MyContext.Provider value="test context">
+							<Component {...pageProps}/> {/* 4. 将数据传入给要渲染的组件或者页面*/}
+						</MyContext.Provider>
+					</Provider>
 				</Layout>
 			</Container>
 		)
 	}
 }
 
-export default MyApp
+export default testHoc(MyApp)
