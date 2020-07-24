@@ -1,7 +1,6 @@
 import Router from 'next/router'
-import store from '../store/store.js'
 import { connect } from 'react-redux';
-
+import {add} from '../store/store.js'
 
 const events = [
 	'routeChangeStart',
@@ -49,6 +48,11 @@ const mapDispatchToProps  = (dispatch) => {
 		addcount: (num)=> dispatch({type: 'ADD', num}),
 		rename:(name) => dispatch({type: 'UPDATE_USERNAME',name})
 	}
+}
+
+Index.getInitialProps = async({reduxStore}) => {
+	reduxStore.dispatch(add(3))
+	return {}
 }
 
 

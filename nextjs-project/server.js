@@ -1,9 +1,7 @@
 const Koa = require('koa')
 const next = require('next')
 const Router = require('koa-router')
-// const Favicon = require('koa-favicon');
 const dev = process.env.NODE_ENV !== 'production'
-
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
@@ -21,7 +19,7 @@ app.prepare().then(()=> {
 		})
 		ctx.respond = false
 	})
-	// server.use(Favicon(__dirname + 'static/favicon.ico'))
+
 	server.use(router.routes())
 
 	server.use(async (ctx, next) => {

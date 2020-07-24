@@ -8,7 +8,7 @@ const initialState = {
 
 const ADD = 'ADD'
 
-function add(num) {
+export function add(num) {
 	return {
 		type: ADD,
 		num
@@ -58,20 +58,23 @@ const allReducers = combineReducers({
 	user: userReducer
 })
 
-const store = createStore(
-	allReducers,
-	{
-		counter: initialState,
-		user:userInitialState
-	},
-	composeWithDevTools(applyMiddleware(ReduxThunk))
-)
 
 // store.dispatch({ type: ADD })
 // store.dispatch(add(4))
-store.dispatch(addAsync(9))
+// store.dispatch(addAsync(9))
 
-store.dispatch({ type:UPDATE_USERNAME,name:'wanglu' })
+// store.dispatch({ type:UPDATE_USERNAME,name:'wanglu' })
 
 
-export default store
+// 返回一个创建store的函数
+export default function initializeStore(state) {
+	const store = createStore(
+		allReducers,
+		Object.assign({},{
+			counter: initialState,
+			user:userInitialState
+		},state),
+		composeWithDevTools(applyMiddleware(ReduxThunk))
+	)
+	return store
+}
