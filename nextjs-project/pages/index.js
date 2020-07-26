@@ -1,6 +1,11 @@
+import { useEffect } from 'react'
+import axios from 'axios'
+
 import Router from 'next/router'
 import { connect } from 'react-redux';
 import {add} from '../store/store.js'
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 
 const events = [
 	'routeChangeStart',
@@ -21,7 +26,14 @@ events.forEach(event => {
 	Router.events.on(event, makeEvent(event))
 })
 
+
 const Index = ({counter,username,rename,addcount}) => {
+
+	useEffect(()=> {
+		axios.get('/api/user/info').then(resp => console.log(resp))
+	},[])
+
+
 	return (
 		<>
 			<span>Index</span>
@@ -30,6 +42,7 @@ const Index = ({counter,username,rename,addcount}) => {
 			<p>Username: {username}</p>
 			<input value={username} onChange={(e) => rename(e.target.value)}/><br/>
 			<button onClick={() => addcount(counter)}>add counter</button>
+			<a href={publicRuntimeConfig.OAUTH_URL}>去登录</a>
 		</>
 	)
 }
