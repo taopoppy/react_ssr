@@ -30,11 +30,11 @@ class MyApp extends App {
 				<Head>
 					<title>Taopoppy</title>
 				</Head>
-				<Layout>
-					<Provider store={reduxStore}>
-						<Component {...pageProps}/> {/* 4. 将数据传入给要渲染的组件或者页面*/}
-					</Provider>
-				</Layout>
+				<Provider store={reduxStore}>
+					<Layout>
+							<Component {...pageProps}/> {/* 4. 将数据传入给要渲染的组件或者页面*/}
+					</Layout>
+				</Provider>
 			</Container>
 		)
 	}

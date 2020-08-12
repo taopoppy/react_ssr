@@ -1,8 +1,12 @@
 import { useState, useCallback } from 'react'
-import { Layout, Icon, Input, Avatar } from 'antd'
+import { Layout, Icon, Input, Avatar,Tooltip,Dropdown, Menu } from 'antd'
 import Container from './Container.jsx'
 
 const {Header, Content, Footer} = Layout
+
+import { connect } from 'react-redux'
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 
 const githubIconStyle = {
 	color: 'white',
@@ -16,7 +20,7 @@ const footerStyle = {
 	textAlign: 'center'
 }
 
-export default ({children}) => {
+function MyLayout ({children, user}) {
 	const [search, setSearch] = useState('')
 
 	const handleSearchChange = useCallback((event)=> {
@@ -24,6 +28,16 @@ export default ({children}) => {
 	}, [setSearch])
 
 	const handleOnSearch = useCallback(() => {}, [])
+
+	const userDropDown = (
+		<Menu>
+			<Menu.Item>
+				<a href="javascript:void(0)">
+					登出
+				</a>
+			</Menu.Item>
+		</Menu>
+	)
 
 	return (
 		<Layout>
@@ -44,7 +58,21 @@ export default ({children}) => {
 					</div>
 					<div className="header-right">
 						<div className="user">
-							<Avatar size={40} icon="user"/>
+							{
+								user && user.id ? (
+									<Dropdown overlay={userDropDown}>
+										<a href="/">
+											<Avatar size={40} src={user.avatar_url}/>
+										</a>
+									</Dropdown>
+								) : (
+									<Tooltip title="登录">
+										<a href={publicRuntimeConfig.OAUTH_URL}>
+											<Avatar size={40} icon="user"/>
+										</a>
+									</Tooltip>
+								)
+							}
 						</div>
 					</div>
 				</Container>
@@ -82,3 +110,12 @@ export default ({children}) => {
 		</Layout>
 	)
 }
+
+const mapStateToProps = (state) => {
+	return {
+		user: state.user
+	}
+}
+
+
+export default connect(mapStateToProps)(MyLayout)
