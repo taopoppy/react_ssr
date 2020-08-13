@@ -56,4 +56,15 @@ module.exports = (server) => {
       await next()  // 其他不是/auth不经过这层处理
     }
   })
+
+  server.use( async (ctx, next)=> {
+    const path = ctx.path
+    const method = ctx.method
+    if(path === '/logout' && method === 'POST') {
+      ctx.session = null
+      ctx.body = `logout success`
+    } else {
+      await next()
+    }
+  })
 }

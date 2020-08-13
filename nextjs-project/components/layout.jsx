@@ -8,6 +8,9 @@ import { connect } from 'react-redux'
 import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
+import { logout } from '../store/store.js'
+
+
 const githubIconStyle = {
 	color: 'white',
 	fontSize: 40,
@@ -20,7 +23,7 @@ const footerStyle = {
 	textAlign: 'center'
 }
 
-function MyLayout ({children, user}) {
+function MyLayout ({children, user, logout}) {
 	const [search, setSearch] = useState('')
 
 	const handleSearchChange = useCallback((event)=> {
@@ -29,10 +32,14 @@ function MyLayout ({children, user}) {
 
 	const handleOnSearch = useCallback(() => {}, [])
 
+	const handleLogout = useCallback(() => {
+		logout()
+	}, [])
+
 	const userDropDown = (
 		<Menu>
 			<Menu.Item>
-				<a href="javascript:void(0)">
+				<a href="javascript:void(0)" onClick={handleLogout}>
 					登出
 				</a>
 			</Menu.Item>
@@ -117,5 +124,13 @@ const mapStateToProps = (state) => {
 	}
 }
 
+const mapDispatchToProps = (dispatch) => {
+	return {
+		logout: () => {
+			dispatch(logout())
+		}
+	}
+}
 
-export default connect(mapStateToProps)(MyLayout)
+
+export default connect(mapStateToProps,mapDispatchToProps)(MyLayout)
