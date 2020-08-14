@@ -4,9 +4,37 @@ import 'antd/dist/antd.css'
 import Layout from '../components/layout'
 import { Provider } from 'react-redux'
 import testHoc from '../lib/with-redux.js'
-
+import PageLoading from '../components/PageLoading'
+import Router from 'next/router'
 
 class MyApp extends App {
+	state = {
+		loading: false
+	}
+
+	startLoading = () => {
+		this.setState({
+			loading: true
+		})
+	}
+
+	stopLoading = () => {
+		this.setState({
+			loading: false
+		})
+	}
+
+	componentDidMount() {
+		Router.events.on('routeChangeStart',this.startLoading)
+		Router.events.on('routeChangeComplete',this.stopLoading)
+		Router.events.on('routeChangeError',this.stopLoading)
+	}
+
+	componentWillUnmount() {
+		Router.events.off('routeChangeStart',this.startLoading)
+		Router.events.off('routeChangeComplete',this.stopLoading)
+		Router.events.off('routeChangeError',this.stopLoading)
+	}
 
 	static async getInitialProps(ctx) {
 		const { Component } = ctx
@@ -31,6 +59,7 @@ class MyApp extends App {
 					<title>Taopoppy</title>
 				</Head>
 				<Provider store={reduxStore}>
+					{this.state.loading? <PageLoading />: null}
 					<Layout>
 							<Component {...pageProps}/> {/* 4. 将数据传入给要渲染的组件或者页面*/}
 					</Layout>

@@ -1,21 +1,21 @@
 import Link from 'next/link'
 
 
-function Index() {
+function Detail() {
 	return (
-		<Link href="/detail">
-			<a>Index</a>
+		<Link href="/">
+			<a>Detail</a>
 		</Link>
 	)
 }
 
-
-Index.getInitialProps = () => {
+Detail.getInitialProps = () => {
 	return new Promise(resolve => {
 		setTimeout(()=> {
 			resolve({})
-		},1000)
+		},2000)
 	})
 }
 
-export default Index
+
+export default Detail

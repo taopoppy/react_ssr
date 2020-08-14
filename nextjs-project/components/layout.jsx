@@ -9,8 +9,8 @@ import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
 import { logout } from '../store/store.js'
-
-
+import axios from 'axios'
+import { withRouter } from 'next/router'
 const githubIconStyle = {
 	color: 'white',
 	fontSize: 40,
@@ -23,7 +23,7 @@ const footerStyle = {
 	textAlign: 'center'
 }
 
-function MyLayout ({children, user, logout}) {
+function MyLayout ({children, user, logout, router}) {
 	const [search, setSearch] = useState('')
 
 	const handleSearchChange = useCallback((event)=> {
@@ -34,7 +34,23 @@ function MyLayout ({children, user, logout}) {
 
 	const handleLogout = useCallback(() => {
 		logout()
-	}, [])
+	}, [logout])
+
+	const handleGotoOAuth = useCallback((e)=> {
+		e.preventDefault()
+		axios.get(`/prepare-auth?url=${router.asPath}`)
+			.then(resp=> {
+				if(resp.status === 200) {
+					location.href = publicRuntimeConfig.OAUTH_URL
+				} else {
+					console.log('prepare auth failed', resp)
+				}
+			})
+			.catch(err=> {
+				console.log('prepare auth failed', err)
+			})
+	},[])
+
 
 	const userDropDown = (
 		<Menu>
@@ -74,7 +90,8 @@ function MyLayout ({children, user, logout}) {
 									</Dropdown>
 								) : (
 									<Tooltip title="登录">
-										<a href={publicRuntimeConfig.OAUTH_URL}>
+										{/* <a href={publicRuntimeConfig.OAUTH_URL} onClick={handleGotoOAuth}> */}
+										<a href={`/prepare-auth?url=${router.asPath}`}>
 											<Avatar size={40} icon="user"/>
 										</a>
 									</Tooltip>
@@ -133,4 +150,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(MyLayout)
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(MyLayout))
