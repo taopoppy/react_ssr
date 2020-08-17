@@ -4,6 +4,7 @@ const Router = require('koa-router')
 const session = require('koa-session')
 const RedisSessionStore = require('./server/session-store.js')
 const Redis = require('ioredis')
+const koaBody = require('koa-body')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
@@ -18,6 +19,8 @@ const redis = new Redis()
 app.prepare().then(()=> {
 	const server = new Koa()
 	const router = new Router()
+
+	server.use(koaBody())
 
 	server.keys = ['Taopoppy develop Github App'] // 设置一个给cookie加密的字符串
 	const SESSION_CONFIG = {
