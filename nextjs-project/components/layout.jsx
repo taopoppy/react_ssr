@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Layout, Icon, Input, Avatar,Tooltip,Dropdown, Menu } from 'antd'
 import Container from './Container.jsx'
-
+import Link from "next/link";
 const {Header, Content, Footer} = Layout
 
 import { connect } from 'react-redux'
@@ -11,6 +11,7 @@ const { publicRuntimeConfig } = getConfig()
 import { logout } from '../store/store.js'
 import axios from 'axios'
 import { withRouter } from 'next/router'
+
 const githubIconStyle = {
 	color: 'white',
 	fontSize: 40,
@@ -24,13 +25,16 @@ const footerStyle = {
 }
 
 function MyLayout ({children, user, logout, router}) {
-	const [search, setSearch] = useState('')
+	const urlQuery = router.query && router.query.query
+	const [search, setSearch] = useState(urlQuery || '')
 
 	const handleSearchChange = useCallback((event)=> {
 		setSearch(event.target.value)
 	}, [setSearch])
 
-	const handleOnSearch = useCallback(() => {}, [])
+	const handleOnSearch = useCallback(() => {
+		router.push(`/search?query=${search}`)
+	}, [search])
 
 	const handleLogout = useCallback(() => {
 		logout()
@@ -68,7 +72,9 @@ function MyLayout ({children, user, logout, router}) {
 				<Container renderer={<div className="header-inner" />}>
 					<div className="header-left">
 						<div className="logo">
-							<Icon type="github" style={githubIconStyle}></Icon>
+							<Link href="/">
+								<Icon type="github" style={githubIconStyle}></Icon>
+							</Link>
 						</div>
 						<div>
 							<Input.Search
@@ -124,11 +130,14 @@ function MyLayout ({children, user, logout, router}) {
 					height: 100%;
 				}
 				.ant-layout {
-					height: 100%;
+					min-height: 100%;
 				}
 				.ant-layout-header {
 					padding-left: 0;
 					padding-right: 0;
+				}
+				.ant-layout-content {
+					background: #fff
 				}
 			`}</style>
 		</Layout>

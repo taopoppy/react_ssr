@@ -9,6 +9,8 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 const auth = require('./server/auth.js')
+const githubapi = require('./server/api.js')
+
 
 // 创建redis的client（全部使用默认配置）
 const redis = new Redis()
@@ -28,6 +30,9 @@ app.prepare().then(()=> {
 
 	// 配置github OAuth登录，其auth函数必须在session后面
 	auth(server)
+
+	// 配置github代理请求
+	githubapi(server)
 
 	router.get('/a/:id', async (ctx) => {
 		const id = ctx.params.id

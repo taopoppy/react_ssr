@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import testHoc from '../lib/with-redux.js'
 import PageLoading from '../components/PageLoading'
 import Router from 'next/router'
+import axios from 'axios'
 
 class MyApp extends App {
 	state = {

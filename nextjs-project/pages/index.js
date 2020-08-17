@@ -1,21 +1,25 @@
 import Link from 'next/link'
-
+import axios from 'axios'
 
 function Index() {
 	return (
-		<Link href="/detail">
-			<a>Index</a>
-		</Link>
+		<>
+			<Link href="/detail">
+				<a>Detail的链接</a>
+			</Link>
+			<p>Index</p>
+		</>
 	)
 }
 
 
-Index.getInitialProps = () => {
-	return new Promise(resolve => {
-		setTimeout(()=> {
-			resolve({})
-		},1000)
-	})
+Index.getInitialProps = async () => {
+	const result = 	await axios
+	.get('/github/search/repositories?q=react')
+	.then(resp => console.log(resp))
+	return {
+		data: result.data
+	}
 }
 
 export default Index
