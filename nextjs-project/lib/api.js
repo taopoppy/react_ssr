@@ -12,7 +12,7 @@ async function requestGithub(method, url, data,headers) {
 		})
 		return result
 	} catch (error) {
-		console.log('github请求失败')
+		console.log(`github请求失败,地址为:${url}`)
 	}
 }
 
