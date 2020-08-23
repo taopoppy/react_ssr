@@ -6,6 +6,7 @@ import Repo from '../components/Repo'
 import Router, { withRouter } from 'next/router'
 import { useEffect } from 'react'
 import LRU from 'lru-cache'
+import { cacheArray } from '../lib/repo-basic-cache'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -40,6 +41,16 @@ function Index({userRepos, userStaredRepos,user,router}) {
 			}
 		}
 	}, [userRepos,userStaredRepos])
+
+	useEffect(()=> {
+		if(!isServer) {
+			if (userRepos && userStaredRepos) {
+				cacheArray(userRepos)
+				cacheArray(userStaredRepos)
+			}
+		}
+	})
+
 
 	if (!user || !user.id) {
 		return <div className="root">

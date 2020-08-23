@@ -11,10 +11,14 @@ const handle = app.getRequestHandler()
 
 const auth = require('./server/auth.js')
 const githubapi = require('./server/api.js')
+const atob = require('atob')
 
 
 // 创建redis的client（全部使用默认配置）
 const redis = new Redis()
+
+// 设置node.js全局有atob方法
+global.atob = atob
 
 app.prepare().then(()=> {
 	const server = new Koa()
