@@ -44,10 +44,8 @@ function Index({userRepos, userStaredRepos,user,router}) {
 
 	useEffect(()=> {
 		if(!isServer) {
-			if (userRepos && userStaredRepos) {
-				cacheArray(userRepos)
-				cacheArray(userStaredRepos)
-			}
+			cacheArray(userRepos)
+			cacheArray(userStaredRepos)
 		}
 	})
 

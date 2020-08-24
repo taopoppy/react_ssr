@@ -16,7 +16,9 @@ export function get(full_name) {
 
 // 对数组中的每项都进行缓存
 export function cacheArray(repos) {
-	repos.forEach(repo => {
-		cache(repo)
-	});
+	if(repos && Array.isArray(repos)) {
+		repos.forEach(repo => {
+			cache(repo)
+		});
+	}
 }
