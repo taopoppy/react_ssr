@@ -4,13 +4,13 @@ import api from '../../lib/api'
 import { useState,useCallback,useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { getLastUpdated } from '../../lib/utils'
-import SearchUser from '../../components/SearchUser'
+import SearchUser from '../../components/SearchUser' // 1. 引入SearchUser组件
 
 const MdRenderer = dynamic(()=> import('../../components/MarkdownRenderer'))
 
+// 12. 声明缓存labels的对象
 const CACHE = {}
 
-// issue具体信息的组件
 function IssueDetail({ issue }) {
 	return (
 		<div className="root">
@@ -31,8 +31,6 @@ function IssueDetail({ issue }) {
 	)
 }
 
-
-// 每个issue组件
 function IssueItem({issue}) {
 	const [showDetail, setShowDetail] = useState(false)
 
@@ -59,6 +57,7 @@ function IssueItem({issue}) {
 					<h6>
 						<span>{issue.title}</span>
 						{
+							//11. 使用Label的样式，在标题上显示Label
 							issue.labels.map(label => {
 								<Label label={label} key={label.id}/>
 							})
@@ -103,6 +102,8 @@ function IssueItem({issue}) {
 	)
 }
 
+
+// 10. 给label添加显示样式
 function Label({ label }) {
 	return (
 		<>
@@ -124,7 +125,7 @@ function Label({ label }) {
 
 const Option = Select.Option
 
-// 拼装query的方法
+// 9. 拼装query的方法
 function makeQuery(creator, state, labels) {
 	let creatorStr = creator? `creator=${creator}`:''
 	let stateStr = state? `state=${state}`:''
@@ -141,7 +142,7 @@ function makeQuery(creator, state, labels) {
 }
 
 const isServer = typeof window === 'undefined'
-function Issues({initialIssues, labels,owner, name}){
+function Issues({initialIssues, labels, owner, name}){
 	const [creator, setCreator ] = useState() // 查询条件creator
 	const [state, setState ] = useState() 		// 查询条件state
 	const [label, setLabel] = useState([])	  // 查询条件label
@@ -150,9 +151,10 @@ function Issues({initialIssues, labels,owner, name}){
 
 	const [fetching, setFetching] = useState(false) // 动画
 
+	// 13. 缓存Labels
 	useEffect(()=> {
 		if(!isServer){
-			CACHE[`${owner}/${name}}`] = labels
+			CACHE[`${owner}/${name}`] = labels
 		}
 	},[labels,name,owner])
 
@@ -169,6 +171,7 @@ function Issues({initialIssues, labels,owner, name}){
 		setLabel(value)
 	}, [])
 
+	// 8. 搜索按钮的点击事件
 	const handleSearch = useCallback(() => {
 		setFetching(true)
 		api.request({
@@ -188,10 +191,10 @@ function Issues({initialIssues, labels,owner, name}){
 	return (
 		<div className="root">
 			<div className="search">
-				{/*  用户搜索 */}
+				{/* 2.  用户搜索 */}
 				<SearchUser onChange={handleCreatorChange} value={creator} />
 
-				{/* Issues状态搜索 */}
+				{/* 3.Issues状态搜索 */}
 				<Select
 					placeholder="状态"
 					onChange={handleStateChange}
@@ -203,7 +206,7 @@ function Issues({initialIssues, labels,owner, name}){
 					<Option value="closed">closed</Option>
 				</Select>
 
-				{/* 仓库labels搜索 */}
+				{/* 4. 仓库labels搜索 */}
 				<Select
 					mode="multiple"
 					placeholder="Label"
@@ -215,6 +218,7 @@ function Issues({initialIssues, labels,owner, name}){
 						labels.map(la => {<Option value={la.name} key={la.id}>{la.name}</Option>})
 					}
 				</Select>
+				{/* 7. 搜索的按钮 */}
 				<Button type="primary" onClick={handleSearch} disabled={fetching}>搜索</Button>
 			</div>
 
@@ -258,7 +262,9 @@ Issues.getInitialProps = async ({ctx}) => {
 			url: `/repos/${owner}/${name}/issues`
 		},ctx.req, ctx.res),
 
-		// 获取仓库所有的label
+		// 5. 获取仓库所有的label
+		// 6. 获取labels的数据应该和issues数据是并发请求的，所以都放在Promise.all中
+		// 14. 使用labels的缓存对象
 		CACHE[full_name]? Promise.resolve({data:CACHE[full_name]}) :
 		await api.request({
 			url: `/repos/${owner}/${name}/labels`

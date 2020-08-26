@@ -113,7 +113,7 @@ function MyLayout ({children, user, logout, router}) {
 				</Container>
 			</Content>
 			<Footer style={footerStyle}>
-				Develop by Taopoppy @<a href="mailto:taopoppy@63.com">taopoppy@63.com</a>
+				Develop by Taopoppy @<a href="mailto:taopoppy@163.com">taopoppy@63.com</a>
 			</Footer>
 			<style jsx>{`
 				.header-inner {
